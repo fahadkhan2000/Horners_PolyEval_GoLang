@@ -7,11 +7,6 @@ import "strconv"
 
 var print = fmt.Println
 
-func printInputData(pol string , val float64) {
-	fmt.Println("Polynomial String = ", pol)
-	fmt.Println("Float type value = ", val)
-}
-
 func convertPolyToStandardFormat(pol string) []string {
 	polWithoutSpaces := s.Replace(pol , " ", "", -1)
 	polWithPlusSigns := s.Replace(polWithoutSpaces, "-", "+-", -1)
@@ -75,17 +70,16 @@ func splitTermIntoCoeffAndPower(singleTerm string) []string {
 }
 
 func convertMonomialFromStringToDouble(splittedCoeffAndPower []string) (coeff, exp float64) {
-	var floatArrayOfMonomials = []float64{}
-
+	var coeffAndExpArray = []float64{}
 	for _,i := range splittedCoeffAndPower {
 		flt, err := strconv.ParseFloat(i , 64)
 		if err != nil {
 			panic(err)
 		}
-		floatArrayOfMonomials = append(floatArrayOfMonomials, flt)
+		coeffAndExpArray = append(coeffAndExpArray, flt)
 	}
-	coeff = floatArrayOfMonomials[0]
-	exp = floatArrayOfMonomials[1]
+	coeff = coeffAndExpArray[0]
+	exp = coeffAndExpArray[1]
 	return coeff, exp
 }
 
@@ -102,7 +96,8 @@ func main() {
     pol := "50x^5 - 40x^4 + 30x^3 -20x^2 +10x+81.1"
     val := 1.0
 
-    printInputData(pol, val)
+	fmt.Println("Polynomial String = ", pol)
+	fmt.Println("Float type value = ", val)
     monomialsArray := convertPolyToStandardFormat(pol)
     calculateFinalResult(monomialsArray , val)
 }
