@@ -7,15 +7,6 @@ import "strconv"
 
 var print = fmt.Println
 
-func main() {
-    pol := "50x^5 - 40x^4 + 30x^3 -20x^2 +10x+81.1"
-    val := 2.0
-
-    printInputData(pol, val)
-    monomialsArray := convertPolyToStandardFormat(pol)
-    calculateFinalResult(monomialsArray , val)
-}
-
 func printInputData(pol string , val float64) {
 	fmt.Println("Polynomial String = ", pol)
 	fmt.Println("Float type value = ", val)
@@ -119,3 +110,13 @@ func calculateFinalResult(monomialsArray []string, val float64) {
 	}
 	print("final result = ", finalRes)
 }
+
+func main() {
+    pol := "50x^5 - 40x^4 + 30x^3 -20x^2 +10x+81.1"
+    val := 2.0
+
+    printInputData(pol, val)
+    monomialsArray := convertPolyToStandardFormat(pol)
+    calculateFinalResult(monomialsArray , val)
+}
+
