@@ -112,13 +112,10 @@ func calculateMonomial(coeff, exp, val float64) float64 {
 }
 
 func calculateFinalResult(monomialsArray []string, val float64) {
-
 	var finalRes float64 = 0.0
 
 	for i := 0; i < len(monomialsArray); i++ {
-
 		finalRes = finalRes + evaluateMonomial(monomialsArray[i] , val) 
 	}
-
 	print("final result = ", finalRes)
 }
