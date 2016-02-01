@@ -11,8 +11,8 @@ func main() {
 
     fmt.Println("Polynomial Evaluation")
 
-    pol := "100 * 3 + x ^ 3"
-    val := 2.0
+    pol := "50x^5 - 40x^4 + 30x^3 -20x^2 +10x+1000.1"
+    val := 1.0
 
     printInputData(pol, val)
 
@@ -93,36 +93,73 @@ func determineTypeOfMonomialForSplitting(singleTerm string) []string {
 
 	splittedCoeffAndPower := []string {"0", "0"}
 
-if s.Contains(singleTerm , "^") == true {
+if s.Contains(singleTerm, "^") == true {
 
-	splittedCoeffAndPower = splitTermIntoCoeffAndPower(singleTerm)
-    print("string type array of monomial's coeff and power" , splittedCoeffAndPower)
+	print("____________________________term contains ^ ")
 
-} else if s.Contains(singleTerm , "^") == false {
+	if s.HasPrefix(singleTerm, "x") == true || s.HasPrefix(singleTerm, "-x") == true || s.HasPrefix(singleTerm, "+x") == true {
 
-	if s.Contains(singleTerm , "x") == true {
+		print("____________________________term hasPrefix +x or -x ")
+
+		singleTerm = s.Replace(singleTerm, "x", "1x", -1)
+		splittedCoeffAndPower = splitTermIntoCoeffAndPower(singleTerm)
+		print("string type array of monomial's coeff and power" , splittedCoeffAndPower)
+
+		} else {
+
+		print("____________________________term hasPrefix +x or -x ")
+
+		splittedCoeffAndPower = splitTermIntoCoeffAndPower(singleTerm)
+        print("string type array of monomial's coeff and power" , splittedCoeffAndPower)
+
+
+		}
+
+} else if s.Contains(singleTerm, "^") == false {
+
+		if s.Contains(singleTerm , "x") == true {
+
+		print("____________________________term is x or -x ")
 
 		singleTerm = s.Replace(singleTerm, "x", "x^1", -1)
 		splittedCoeffAndPower = splitTermIntoCoeffAndPower(singleTerm)
 		print("string type array of monomial's coeff and power" , splittedCoeffAndPower)
 
 	} else {
+
+		print("____________________________term is constant ")
+
 		var appender string = "x^0"
 
 		singleTerm = s.Join([]string{singleTerm, appender} , "")
 		splittedCoeffAndPower = splitTermIntoCoeffAndPower(singleTerm)
 		print("string type array of monomial's coeff and power" , splittedCoeffAndPower)
 	}
+
 } 
 return splittedCoeffAndPower
+
 }
+
 
 func splitTermIntoCoeffAndPower(singleTerm string) []string {
 
-	splittedCoeffAndPower := s.Split(singleTerm, "^")
-	tempString := s.Join(splittedCoeffAndPower, "")
-	splittedCoeffAndPower = splittedCoeffAndPower[:0]
-	splittedCoeffAndPower = s.Split(tempString, "x")
+	var splittedCoeffAndPower = []string{}
+
+	if singleTerm == "x^1" || singleTerm == "-x^1" {
+
+		singleTerm = s.Replace(singleTerm, "x", "1", -1)
+
+		splittedCoeffAndPower = s.Split(singleTerm, "^")
+
+	} else{
+
+			splittedCoeffAndPower = s.Split(singleTerm, "^")
+	        tempString := s.Join(splittedCoeffAndPower, "")
+	        splittedCoeffAndPower = splittedCoeffAndPower[:0]
+	        splittedCoeffAndPower = s.Split(tempString, "x")
+
+	}
 
 	return splittedCoeffAndPower
 }
