@@ -33,7 +33,7 @@ func createTermsBySplitingPoly(polWithPlusSigns string) []string {
 func evaluateMonomial(singleTerm string , val float64) float64 {
 	splittedCoeffAndPower := determineTypeOfMonomialForSplitting(singleTerm)
 	coeff, exp := convertMonomialFromStringToDouble(splittedCoeffAndPower)
-	return calculateMonomial(coeff, exp, val)
+	return coeff * (math.Pow(val , exp))
 }
 
 func determineTypeOfMonomialForSplitting(singleTerm string) []string {
@@ -89,10 +89,6 @@ func convertMonomialFromStringToDouble(splittedCoeffAndPower []string) (coeff, e
 	return coeff, exp
 }
 
-func calculateMonomial(coeff, exp, val float64) float64 {
-	return coeff * (math.Pow(val , exp))
-}
-
 func calculateFinalResult(monomialsArray []string, val float64) {
 	var finalRes float64 = 0.0
 
@@ -110,4 +106,3 @@ func main() {
     monomialsArray := convertPolyToStandardFormat(pol)
     calculateFinalResult(monomialsArray , val)
 }
-
