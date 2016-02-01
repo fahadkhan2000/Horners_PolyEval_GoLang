@@ -13,21 +13,12 @@ func printInputData(pol string , val float64) {
 }
 
 func convertPolyToStandardFormat(pol string) []string {
-	polWithoutSpaces := removeAllSpacesFromPoly(pol)
-	polWithPlusSigns := addPlusSignstoPoly(polWithoutSpaces)
+	polWithoutSpaces := s.Replace(pol , " ", "", -1)
+	polWithPlusSigns := s.Replace(polWithoutSpaces, "-", "+-", -1)
 	monomialsArray := createTermsBySplitingPoly(polWithPlusSigns)
 	
 	print("Array of monomials = " , monomialsArray)
 	return monomialsArray
-}
-
-func removeAllSpacesFromPoly(pol string) string {
-	return s.Replace(pol , " ", "", -1)
-}
-
-func addPlusSignstoPoly(polWithoutSpaces string) string {
-    polWithPlusSigns := s.Replace(polWithoutSpaces, "-", "+-", -1)
-	return polWithPlusSigns
 }
 
 func createTermsBySplitingPoly(polWithPlusSigns string) []string {
@@ -113,7 +104,7 @@ func calculateFinalResult(monomialsArray []string, val float64) {
 
 func main() {
     pol := "50x^5 - 40x^4 + 30x^3 -20x^2 +10x+81.1"
-    val := 2.0
+    val := 1.0
 
     printInputData(pol, val)
     monomialsArray := convertPolyToStandardFormat(pol)
